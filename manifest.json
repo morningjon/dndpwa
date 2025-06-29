@@ -1,0 +1,21 @@
+{
+    "name": "D&D Beyond (PWA Wrapper)",
+    "short_name": "DDB Wrapper",
+    "description": "A simple PWA wrapper for D&D Beyond for a distraction-free experience.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#1a202c",
+    "theme_color": "#1a202c",
+    "icons": [
+        {
+            "src": "/images/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
