@@ -2,72 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D&D Beyond PWA Wrapper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <title>D&D Beyond PWA</title>
+
+    <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1a202c">
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden; /* Prevent body scrollbars */
-            display: flex;
-            flex-direction: column;
-            height: 100vh; /* Full viewport height */
-            background-color: #1a202c; /* Background color for splash screen/loading */
-        }
-        iframe {
-            flex-grow: 1; /* Make iframe take up all available space */
-            border: none;
-            width: 100%;
-            height: 100%;
-            display: block; /* Remove extra space below iframe */
-        }
-        .loading-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: #1a202c; /* Match body background */
-            z-index: 100;
-            color: white;
-            font-family: sans-serif;
-            font-size: 1.2em;
-        }
-        .loading-container.hidden {
-            display: none;
-        }
-    </style>
+
+    <!-- Set icon for PWA -->
+    <link rel="icon" href="icon.png">
+    
+    <!-- Service Worker (optional but recommended) -->
+    <script>
+      if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+              navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                  console.log('Service Worker registered with scope:', registration.scope);
+              }).catch(function(error) {
+                  console.log('Service Worker registration failed:', error);
+              });
+          });
+      }
+    </script>
 </head>
 <body>
-    <div class="loading-container" id="loadingScreen">
-        Loading D&D Beyond...
-    </div>
-    <iframe id="dndbIframe" src="https://www.dndbeyond.com" title="D&D Beyond"></iframe>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(registration => {
-                        console.log('Service Worker registered:', registration);
-                    })
-                    .catch(error => {
-                        console.error('Service Worker registration failed:', error);
-                    });
-            });
-        }
-
-        const dndbIframe = document.getElementById('dndbIframe');
-        const loadingScreen = document.getElementById('loadingScreen');
-
-        // Hide loading screen once iframe content (or at least the initial frame) is loaded
-        dndbIframe.onload = () => {
-            loadingScreen.classList.add('hidden');
-        };
-    </script>
+    <iframe src="https://www.dndbeyond.com" style="width: 100%; height: 100vh; border: none;"></iframe>
 </body>
 </html>
